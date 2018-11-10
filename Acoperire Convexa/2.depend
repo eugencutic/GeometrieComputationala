@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1541870675 source:c:\users\eugen\desktop\cursuri\geometrie computationala\lab\2\main.cpp
+	<iostream>
+	<vector>
+	<math.h>
+	<algorithm>
+	"punct.h"
+
+1541869358 c:\users\eugen\desktop\cursuri\geometrie computationala\lab\2\punct.h
+
