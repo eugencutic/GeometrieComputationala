@@ -24,12 +24,24 @@ struct punct
 
     static bool verificaEcuatii(punct a, punct b, punct c, double rap)
     {
-        if( (c.x - a.x) == rap*(b.x - a.x) &&
-            (c.y - a.y) == rap*(b.y - a.y) &&
-            (c.z - a.z) == rap*(b.z - a.z) )
-            return true;
+        double checkX = (c.x - a.x);
+        double checkRX = rap*(b.x - a.x);
+        double checkY = (c.y - a.y);
+        double checkRY = rap*(b.y - a.y);
+        double checkZ = (c.z - a.z);
+        double checkRZ = rap*(b.z - a.z);
 
-        return false;
+        if( (checkX == checkRX) &&
+            (checkY == checkRY) &&
+            (checkZ == checkRZ) )
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+
     }
 
     static void determinaCombinatieAfina(punct a, punct b, punct c)
@@ -80,15 +92,19 @@ struct punct
         }
 
         double rap = determinaRaport(a, b, c);
-        if(rap == 0)
+
+        /*if(rap == 0)
         {
             return false;
-        }
+        }*/
 
         if( !verificaEcuatii(a, b, c, rap) )
         {
+
             return false;
+
         }
+
         return true;
     }
 
