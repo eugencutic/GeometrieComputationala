@@ -10,6 +10,20 @@ struct punct
         return (this->x == p.x && this->y == p.y && this->z == p.z);
     }
 
+    bool operator< (punct& p)
+    {
+        if (x != p.x)
+            return x < p.x;
+        return y < p.y;
+    }
+
+    bool operator<= (punct& p)
+    {
+        if (x != p.x)
+            return x <= p.x;
+        return y <= p.y;
+    }
+
     static double determinaRaport(punct a, punct b, punct c)
     {
         if(a.y != b.y)
@@ -106,6 +120,20 @@ struct punct
         }
 
         return true;
+    }
+
+    static punct minPct(punct a, punct b)
+    {
+        if (a.x != b.x)
+            return a.x <= b.x ? a : b;
+        return a.y <= b.y ? a : b;
+    }
+
+    static punct maxPct(punct a, punct b)
+    {
+        if (a.x != b.x)
+            return a.x >= b.x ? a : b;
+        return a.y >= b.y ? a : b;
     }
 
     //0 - coliniare; 1 - r e la stanga lui pq; -1 - r e la dreapta lui pq

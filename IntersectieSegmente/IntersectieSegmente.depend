@@ -1,8 +1,9 @@
 # depslib dependency file v1.0
-1541877247 source:c:\users\eugen\desktop\cursuri\geometrie computationala\lab\intersectiesegmente\main.cpp
+1542877874 source:c:\users\eugen\desktop\cursuri\geometrie computationala\lab\intersectiesegmente\main.cpp
 	<iostream>
 	<math.h>
+	<algorithm>
 	"punct.h"
 
-1541877181 c:\users\eugen\desktop\cursuri\geometrie computationala\lab\intersectiesegmente\punct.h
+1542875763 c:\users\eugen\desktop\cursuri\geometrie computationala\lab\intersectiesegmente\punct.h
 

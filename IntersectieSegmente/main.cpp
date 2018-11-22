@@ -1,5 +1,6 @@
 #include <iostream>
 #include <math.h>
+#include <algorithm>
 
 using namespace std;
 
@@ -13,58 +14,72 @@ double determinant(double d11, double d12, double d21, double d22)
 void determinaIntersectie(punct a, punct b, punct c, punct d)
 {
     double det = determinant(b.x - a.x, c.x - d.x, b.y - a.y, c.y - d.y);
+    double p;
 
     punct m;
 
     if(det != 0)
     {
-        double p, q;
-
         p = determinant(c.x - a.x, c.x - d.x, c.y - a.y, c.y - d.y) / det;
-        //q = determinant(b.x - a.x, c.x - a.x, b.y - a.y, c.y - a.y) / det;
-
+    }
+    if(det != 0 && p >= 0 && p <= 1)
+    {
         m.x = (1-p) * a.x + p * b.x;
         m.y = (1-p) * a.y + p * b.y;
         cout << m.x << ", " << m.y << endl;
         return;
     }
 
-    if( punct::determinaColiniaritate(a, b, c) )
+    if( punct::determinaColiniaritate(a, b, c) && punct::determinaColiniaritate(b, c , d) )
     {
 
-        cout << "Punctele sunt coliniare." << endl;
+        punct min1 = punct::minPct(a, b);
+        punct min2 = punct::minPct(c, d);
+        punct max1 = punct::maxPct(a, b);
+        punct max2 = punct::maxPct(c, d);
 
-        double rapACB = punct::determinaRaport(a, c, b);
-        double rapADB = punct::determinaRaport(a, d, b);
+        punct temp = punct::minPct(max1, max2);
 
-
-        cout<<rapACB<<" "<<rapADB;
-        if(rapACB > 0 && rapACB < 1)
+        if (min1 == min2 && max1 == max2)
         {
-
-            if(rapADB < 0 || rapADB > 1)
-            {
-                cout << "Intersectia este segmentul 2." << endl;
-            }
-            else
-            {
-                cout << "Intersectia este segmentul de la (" << c.x << ", " << c.y << ") la (" << b.x << ", " << b.y << ")." << endl;
-            }
+            cout << "Segmentele sunt identice\n";
         }
-        else
+        if (max2 < min1)
         {
-            if(rapADB > 0 && rapADB < 1)
-            {
-                cout << "Intersectia este segmentul de la (" << a.x << ", " << a.y << ") la (" << d.x << ", " << d.y << ")." << endl;
-            }
-            else
-            {
-                cout << "Segmentele nu se intersecteaza.";
-            }
+            cout << "Intersectia este MULTIMEA VIDA\n";
+            return;
         }
+        if (max2 == min1)
+        {
+            cout << "Segmentele se intersecteaza in punctul (" << min1.x << "," << min1.y << ")\n";
+            return;
+        }
+        if (min2 < min1)
+        {
+            cout <<"Segmentele se intersectaza in segmentul: (" << min1.x << "," << min1.y << ") , (" << temp.x << "," << temp.y << ")\n";
+            return;
+        }
+        if (min1 == min2 && min2 == temp)
+        {
+            cout << "Segmentele se intersecteaza in punctul (" << min1.x << "," << min1.y << ")\n";
+            return;
+        }
+
+        if (min2 < temp)
+        {
+            cout << "Segmentele se intersectaza in segmentul: (" << min2.x << "," << min2.y << ") , (" << temp.x << "," << temp.y << ")\n";
+            return;
+        }
+
+        if (min2 == temp)
+        {
+            cout << "Segmentele se intersecteaza in punctul (" << min2.x << "," << min2.y << ")\n";
+            return;
+        }
+        cout << "Intersectia este MULTIMEA VIDA\n";
         return;
     }
-    cout << "Segmentele nu se intersecteaza";
+    cout << "Segmentele nu se intersecteaza\n";
 }
 
 int main()
@@ -81,7 +96,7 @@ int main()
         p[i].z = 0;
         p[i].indice = i+1;
     }
-    double testRap = 1/3;
+
 
 
     determinaIntersectie(p[0], p[1], p[2], p[3]);
